@@ -19,9 +19,10 @@ dataset_dir = "/media/aayush/New Volume/braindata/ADNI1_Complete 1Yr 1.5T/ADNI"
 output_dir = "/media/aayush/New Volume/braindata/ADNI1_Processed"
 for subject in os.listdir(dataset_dir):
     for image_id in os.listdir(f"{dataset_dir}/{subject}"):
-        for filename in os.listdir(f"{dataset_dir}/{subject}/{image_id}"):
-            if filename.endswith(".nii"):
-                print("Processing", subject, image_id)
-                start_time = time.time()
-                preprocess(f"{dataset_dir}/{subject}/{image_id}", f"{output_dir}/{subject}/{image_id}")
-                print("Processed in ", time.time() - start_time)
+        for folder in os.listdir(f"{dataset_dir}/{subject}/{image_id}"):
+            for filename in os.listdir(f"{dataset_dir}/{subject}/{image_id}/{folder}"):
+                if filename.endswith(".nii"):
+                    print("Processing", subject, image_id)
+                    start_time = time.time()
+                    preprocess(f"{dataset_dir}/{subject}/{image_id}/{folder}", f"{output_dir}/{subject}/{image_id}")
+                    print("Processed in ", time.time() - start_time)
